@@ -9,6 +9,8 @@ import dev48n02m41.socialmediamoodtracker.R
 private lateinit var seekBarAfter: SeekBar
 private lateinit var seekBarBefore: SeekBar
 private lateinit var textViewHowIFeel: TextView
+private lateinit var textViewHowIFelt: TextView
+
 
 class AskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,15 +25,16 @@ class AskActivity : AppCompatActivity() {
         seekBarBefore = findViewById(R.id.seekBarBefore)
         seekBarAfter = findViewById(R.id.seekBarAfter)
         textViewHowIFeel = findViewById(R.id.textViewHowIFeel)
+        textViewHowIFelt = findViewById(R.id.textViewHowIFelt)
 
-        seekBarAfter.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        seekBarBefore.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 when (progress) {
-                    0 -> textViewHowIFeel.text = "I felt terrible."
-                    1 -> textViewHowIFeel.text = "I felt bad."
-                    2 -> textViewHowIFeel.text = "I felt okay."
-                    3 -> textViewHowIFeel.text = "I felt good."
-                    4 -> textViewHowIFeel.text = "I felt fantastic!"
+                    0 -> textViewHowIFelt.text = "I felt terrible."
+                    1 -> textViewHowIFelt.text = "I felt bad."
+                    2 -> textViewHowIFelt.text = "I felt okay."
+                    3 -> textViewHowIFelt.text = "I felt good."
+                    4 -> textViewHowIFelt.text = "I felt fantastic!"
                 }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
