@@ -1,159 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AskActivity">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewQuestion1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:text="How did you feel BEFORE using \nsocial media today?"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner" />
-
-    <TextView
-        android:id="@+id/textViewHowIFelt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="I felt okay."
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewQuestion1" />
-
-    <SeekBar
-        android:id="@+id/seekBarBefore"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:max="4"
-        android:progress="2"
-        android:indeterminate="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewHowIFelt"
-        />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewGood2"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/seekBarBefore"
-        app:layout_constraintBottom_toBottomOf="@id/seekBarBefore"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Good"
-        />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="900dp"
+            tools:context=".ui.AskActivity">
 
-    <TextView
-        android:id="@+id/textViewBad2"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/seekBarBefore"
-        app:layout_constraintBottom_toBottomOf="@id/seekBarBefore"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Bad"
-        />
+            <TextView
+                android:id="@+id/textViewQuestion1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:text="How did you feel BEFORE using \nsocial media today?"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner" />
 
+            <TextView
+                android:id="@+id/textViewHowIFelt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="I felt okay."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewQuestion1" />
 
-    <TextView
-        android:id="@+id/textViewQuestion2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="80dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:text="How did you feel AFTER using \nsocial media today?"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/seekBarBefore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <SeekBar
+                android:id="@+id/seekBarBefore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:max="4"
+                android:progress="2"
+                android:indeterminate="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewHowIFelt"
+                />
 
-    <TextView
-        android:id="@+id/textViewHowIFeel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="I feel okay."
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewQuestion2"/>
+            <TextView
+                android:id="@+id/textViewGood2"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/seekBarBefore"
+                app:layout_constraintBottom_toBottomOf="@id/seekBarBefore"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Good"
+                />
 
-    <SeekBar
-        android:id="@+id/seekBarAfter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:max="4"
-        android:progress="2"
-        android:indeterminate="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewHowIFeel"
-         />
-
-    <TextView
-        android:id="@+id/textViewBad"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/seekBarAfter"
-        app:layout_constraintBottom_toBottomOf="@id/seekBarAfter"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Bad"
-         />
-
-    <TextView
-        android:id="@+id/textViewGood"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/seekBarAfter"
-        app:layout_constraintBottom_toBottomOf="@id/seekBarAfter"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Good"
-        />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_margin="32dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/textViewSpinnerLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:spinnerMode="dialog"
-         />
-
-    <TextView
-        android:id="@+id/textViewSpinnerLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select social network:"
-        app:layout_constraintTop_toTopOf="@id/spinner"
-        app:layout_constraintBottom_toBottomOf="@id/spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/spinner"
-        android:layout_margin="32dp"
-         />
+            <TextView
+                android:id="@+id/textViewBad2"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/seekBarBefore"
+                app:layout_constraintBottom_toBottomOf="@id/seekBarBefore"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Bad"
+                />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewQuestion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="80dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:text="How did you feel AFTER using \nsocial media today?"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/seekBarBefore"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewHowIFeel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="I feel okay."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewQuestion2"/>
+
+            <SeekBar
+                android:id="@+id/seekBarAfter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:max="4"
+                android:progress="2"
+                android:indeterminate="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewHowIFeel"
+                />
+
+            <TextView
+                android:id="@+id/textViewBad"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/seekBarAfter"
+                app:layout_constraintBottom_toBottomOf="@id/seekBarAfter"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Bad"
+                />
+
+            <TextView
+                android:id="@+id/textViewGood"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/seekBarAfter"
+                app:layout_constraintBottom_toBottomOf="@id/seekBarAfter"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Good"
+                />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_margin="32dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/textViewSpinnerLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:spinnerMode="dialog"
+                />
+
+            <TextView
+                android:id="@+id/textViewSpinnerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select social network:"
+                app:layout_constraintTop_toTopOf="@id/spinner"
+                app:layout_constraintBottom_toBottomOf="@id/spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/spinner"
+                android:layout_margin="32dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
+
