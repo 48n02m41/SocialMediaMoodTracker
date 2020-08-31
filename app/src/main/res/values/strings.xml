@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">SocialMedia Mood Tracker</string>
+
+    <string-array name="social_networks_array">
+        <item>Facebook</item>
+        <item>Instagram</item>
+        <item>Twitter</item>
+
+        <item>TikTok</item>
+        <item>Snapchat</item>
+        <item>Reddit</item>
+        <item>YouTube</item>
+        <item>Pinterest</item>
+
+        <item>WeChat</item>
+        <item>QQ</item>
+        <item>QZone</item>
+        <item>SinaWeibo</item>
+
+        <item>Other</item>
+    </string-array>
+
 </resources>

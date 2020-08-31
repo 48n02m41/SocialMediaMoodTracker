@@ -2,7 +2,9 @@ package dev48n02m41.socialmediamoodtracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import android.widget.Spinner
 import android.widget.TextView
 import dev48n02m41.socialmediamoodtracker.R
 
@@ -10,6 +12,7 @@ private lateinit var seekBarAfter: SeekBar
 private lateinit var seekBarBefore: SeekBar
 private lateinit var textViewHowIFeel: TextView
 private lateinit var textViewHowIFelt: TextView
+private lateinit var spinner: Spinner
 
 
 class AskActivity : AppCompatActivity() {
@@ -54,5 +57,19 @@ class AskActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+
+        spinner = findViewById(R.id.spinner)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.social_networks_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
     }
 }

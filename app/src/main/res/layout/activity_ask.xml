@@ -11,14 +11,14 @@
         android:id="@+id/textViewQuestion1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginBottom="16dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:text="How did you feel BEFORE using \nsocial media today?"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/spinner" />
 
     <TextView
         android:id="@+id/textViewHowIFelt"
@@ -74,11 +74,12 @@
         android:id="@+id/textViewQuestion2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="80dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:text="How did you feel AFTER using \nsocial media today?"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/textViewHowIFeel"
+        app:layout_constraintTop_toBottomOf="@id/seekBarBefore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,8 +93,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewQuestion2"/>
 
     <SeekBar
         android:id="@+id/seekBarAfter"
@@ -131,6 +131,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Good"
         />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_margin="32dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/textViewSpinnerLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:spinnerMode="dialog"
+         />
+
+    <TextView
+        android:id="@+id/textViewSpinnerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select social network:"
+        app:layout_constraintTop_toTopOf="@id/spinner"
+        app:layout_constraintBottom_toBottomOf="@id/spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinner"
+        android:layout_margin="32dp"
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
