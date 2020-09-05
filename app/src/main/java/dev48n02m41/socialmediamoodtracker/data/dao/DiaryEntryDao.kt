@@ -1,7 +1,6 @@
 package dev48n02m41.socialmediamoodtracker.data.dao
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room.*
 import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -19,5 +18,17 @@ interface DiaryEntryDao {
 
     fun getAllBySocialNetworkFlow(socialNetworkIn: String) = getBySocialNetwork(socialNetworkIn).distinctUntilChanged()
 
+    // Insert / update
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOne(vararg objectIn: DiaryEntryEntity)
 
+    @Update
+    suspend fun updateOne(vararg objectIn: DiaryEntryEntity)
+
+    // Delete
+    @Delete
+    suspend fun deleteOne(vararg objectIn: DiaryEntryEntity)
+
+    @Query("DELETE FROM diary_entry_table")
+    fun deleteAll()
 }
