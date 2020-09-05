@@ -30,5 +30,5 @@ interface DiaryEntryDao {
     suspend fun deleteOne(vararg objectIn: DiaryEntryEntity)
 
     @Query("DELETE FROM diary_entry_table")
-    fun deleteAll()
+    suspend fun deleteAll()
 }
