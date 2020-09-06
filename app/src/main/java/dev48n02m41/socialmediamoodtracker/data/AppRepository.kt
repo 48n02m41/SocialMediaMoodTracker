@@ -39,7 +39,6 @@ class AppRepository(application: Application) {
         diaryEntryDao.deleteAll()
     }
 
-
     companion object {
         private const val TAG = "AppRepository"
     }

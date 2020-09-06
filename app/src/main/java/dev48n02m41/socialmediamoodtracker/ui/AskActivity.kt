@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.lifecycle.ViewModelProvider
 import dev48n02m41.socialmediamoodtracker.R
 import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
+import dev48n02m41.socialmediamoodtracker.ui.viewmodels.DiaryEntryViewModel
 import java.time.Instant
 import java.util.*
 
@@ -18,13 +20,22 @@ private lateinit var spinner: Spinner
 private var beforeRating: Int = 0
 private var afterRating: Int = 0
 private var chosenSocialNetwork: String = ""
+private lateinit var diaryEntryViewModel: DiaryEntryViewModel
 
 class AskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ask)
-
         handleUI()
+
+        // ViewModel
+        diaryEntryViewModel = ViewModelProvider(this).get(DiaryEntryViewModel::class.java)
+
+        diaryEntryViewModel.allDiaryEntries.observe(this, { results ->
+            results?.let {
+                Log.d(TAG, "Number of diary entries in database right now: " + results.size)
+            }
+        })
     }
 
     private fun handleUI() {
@@ -92,12 +103,9 @@ class AskActivity : AppCompatActivity() {
     }
 
     fun submit(view: View) {
-        // TODO: implement
-        Log.d(TAG, "Submit function was triggered.")
-
-        var newDiary = DiaryEntryEntity(chosenSocialNetwork, beforeRating, afterRating)
+        val newDiary = DiaryEntryEntity(chosenSocialNetwork, beforeRating, afterRating)
+        diaryEntryViewModel.insertDiaryEntry(newDiary)
     }
-
 
     companion object {
         private const val TAG = "AskActivity"
