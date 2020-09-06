@@ -2,18 +2,22 @@ package dev48n02m41.socialmediamoodtracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.SeekBar
-import android.widget.Spinner
-import android.widget.TextView
+import android.util.Log
+import android.view.View
+import android.widget.*
 import dev48n02m41.socialmediamoodtracker.R
+import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
+import java.time.Instant
+import java.util.*
 
 private lateinit var seekBarAfter: SeekBar
 private lateinit var seekBarBefore: SeekBar
 private lateinit var textViewHowIFeel: TextView
 private lateinit var textViewHowIFelt: TextView
 private lateinit var spinner: Spinner
-
+private var beforeRating: Int = 0
+private var afterRating: Int = 0
+private var chosenSocialNetwork: String = ""
 
 class AskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +43,9 @@ class AskActivity : AppCompatActivity() {
                     3 -> textViewHowIFelt.text = "I felt good."
                     4 -> textViewHowIFelt.text = "I felt fantastic!"
                 }
+                beforeRating = progress
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -53,7 +59,9 @@ class AskActivity : AppCompatActivity() {
                     3 -> textViewHowIFeel.text = "I feel good."
                     4 -> textViewHowIFeel.text = "I feel fantastic!"
                 }
+                afterRating = progress
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -71,5 +79,27 @@ class AskActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
+        spinner.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                chosenSocialNetwork = parent?.getItemAtPosition(position).toString()
+                Log.d(TAG, "Chosen social network: $chosenSocialNetwork")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        })
+    }
+
+    fun submit(view: View) {
+        // TODO: implement
+        Log.d(TAG, "Submit function was triggered.")
+
+        var newDiary = DiaryEntryEntity(chosenSocialNetwork, beforeRating, afterRating)
+    }
+
+
+    companion object {
+        private const val TAG = "AskActivity"
     }
 }

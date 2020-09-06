@@ -2,15 +2,21 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bcc498fd57f8b5de2361a3dbc9cb676c",
+    "identityHash": "578c5ff7489a82d886f79a16cefa0a1d",
     "entities": [
       {
         "tableName": "diary_entry_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER, `date_created` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `date_created` INTEGER NOT NULL, `social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "date_created",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -31,19 +37,13 @@
             "columnName": "after_mood_rating",
             "affinity": "INTEGER",
             "notNull": false
-          },
-          {
-            "fieldPath": "dateCreated",
-            "columnName": "date_created",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -52,7 +52,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bcc498fd57f8b5de2361a3dbc9cb676c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '578c5ff7489a82d886f79a16cefa0a1d')"
     ]
   }
 }
