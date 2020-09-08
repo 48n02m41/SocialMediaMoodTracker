@@ -1,5 +1,6 @@
 package dev48n02m41.socialmediamoodtracker.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -26,13 +27,14 @@ class MoodLogListAdapter internal constructor(context: Context) : RecyclerView.A
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val current = moodLogsList[position]
 
         holder.textViewId.text = current.id.toString()
         holder.textViewDate.text = current.getFormattedDateShort()
-        holder.textViewBeforeRating.text = (current.beforeMoodRating?.plus(1)).toString()
-        holder.textViewAfterRating.text = (current.afterMoodRating?.plus(1)).toString()
+        holder.textViewBeforeRating.text = (current.beforeMoodRating?.plus(1)).toString() + "/5"
+        holder.textViewAfterRating.text = (current.afterMoodRating?.plus(1)).toString() + "/5"
     }
 
     internal fun setMoodLogsList(listIn: List<DiaryEntryEntity>) {
