@@ -44,4 +44,26 @@
         android:text="This app is currently in an unfinished state. \nFollow my progress on GitHub. \nhttps://github.com/48n02m41"
         />
 
+    <TextView
+        android:id="@+id/header1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You are the product."
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        />
+
+    <TextView
+        android:id="@+id/body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/header1"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Free services aren't free.\nAre you being psychologically manipulated?"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

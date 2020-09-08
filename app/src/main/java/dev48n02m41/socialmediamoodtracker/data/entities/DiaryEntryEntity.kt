@@ -31,4 +31,12 @@ data class DiaryEntryEntity(
 
         return dateTimeFormatter.format(dateCreated);
     }
+
+    fun getFormattedDateVeryShort(): String {
+        val dateTimeFormatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm")
+                .withZone(ZoneId.systemDefault())
+
+        return dateTimeFormatter.format(dateCreated);
+    }
 }

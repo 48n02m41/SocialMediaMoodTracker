@@ -20,6 +20,7 @@ class MoodLogListAdapter internal constructor(context: Context) : RecyclerView.A
         val textViewDate: TextView = itemView.findViewById(R.id.textview_date)
         val textViewBeforeRating: TextView = itemView.findViewById(R.id.textview_before)
         val textViewAfterRating: TextView = itemView.findViewById(R.id.textview_after)
+        val textViewSocialNetwork: TextView = itemView.findViewById(R.id.textview_network)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,9 +33,10 @@ class MoodLogListAdapter internal constructor(context: Context) : RecyclerView.A
         val current = moodLogsList[position]
 
         holder.textViewId.text = current.id.toString()
-        holder.textViewDate.text = current.getFormattedDateShort()
+        holder.textViewDate.text = current.getFormattedDateVeryShort()
         holder.textViewBeforeRating.text = (current.beforeMoodRating?.plus(1)).toString() + "/5"
         holder.textViewAfterRating.text = (current.afterMoodRating?.plus(1)).toString() + "/5"
+        holder.textViewSocialNetwork.text = current.socialNetworkChoice
     }
 
     internal fun setMoodLogsList(listIn: List<DiaryEntryEntity>) {
