@@ -4,20 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <Button
         android:id="@+id/btn_ask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Ask"
-        android:minWidth="120dp"
-        android:onClick="openToDoListActivity"
+        android:text="Log Mood"
+        android:minWidth="160dp"
+        android:layout_margin="8dp"
+        android:onClick="openAskActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
          />
+
+    <Button
+        android:id="@+id/btn_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Log List"
+        android:minWidth="160dp"
+        android:layout_margin="8dp"
+        android:onClick="openMoodLogListActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_ask"
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -25,7 +39,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_ask"
+        app:layout_constraintTop_toBottomOf="@id/btn_list"
         android:layout_margin="32dp"
         android:text="This app is currently in an unfinished state. \nFollow my progress on GitHub. \nhttps://github.com/48n02m41"
         />
