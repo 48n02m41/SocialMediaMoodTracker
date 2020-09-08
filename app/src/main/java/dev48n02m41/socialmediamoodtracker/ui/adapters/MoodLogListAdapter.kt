@@ -32,6 +32,7 @@ class MoodLogListAdapter internal constructor(context: Context) : RecyclerView.A
         holder.textViewId.text = current.id.toString()
 
         // TODO: Display other data from list.
+        holder.textViewDate.text = current.getFormattedDateShort()
     }
 
     internal fun setMoodLogsList(listIn: List<DiaryEntryEntity>) {
