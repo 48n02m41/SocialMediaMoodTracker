@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SocialMedia Mood Tracker</string>
+    <string name="app_name">Mood Tracker for Social Media</string>
 
     <string-array name="social_networks_array">
         <item>Facebook</item>
