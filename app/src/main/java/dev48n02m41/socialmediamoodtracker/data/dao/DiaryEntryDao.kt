@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 @Dao
 interface DiaryEntryDao {
 
-    @Query("SELECT * FROM diary_entry_table")
+    @Query("SELECT * FROM diary_entry_table ORDER BY id DESC")
     abstract fun getAll(): Flow<List<DiaryEntryEntity>>
 
     fun getAllFlow() = getAll().distinctUntilChanged() // Flow only notifies on change.
 
-    @Query("SELECT * FROM diary_entry_table WHERE social_network = :socialNetworkIn")
+    @Query("SELECT * FROM diary_entry_table WHERE social_network = :socialNetworkIn ORDER BY id DESC")
     abstract fun getBySocialNetwork(socialNetworkIn: String): Flow<List<DiaryEntryEntity>>
 
     fun getAllBySocialNetworkFlow(socialNetworkIn: String) = getBySocialNetwork(socialNetworkIn).distinctUntilChanged()
