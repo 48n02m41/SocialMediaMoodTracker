@@ -105,6 +105,9 @@ class AskActivity : AppCompatActivity() {
     fun submit(view: View) {
         val newDiary = DiaryEntryEntity(chosenSocialNetwork, beforeRating, afterRating)
         diaryEntryViewModel.insertDiaryEntry(newDiary)
+
+        Toast.makeText(this, "Saved!", Toast.LENGTH_LONG).show()
+        finish()
     }
 
     companion object {
