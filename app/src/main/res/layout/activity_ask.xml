@@ -3,14 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
+    android:id="@+id/view_ask"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="900dp"
         tools:context=".ui.AskActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="?android:textColorPrimaryInverse"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            />
 
         <TextView
             android:id="@+id/textViewQuestion1"
@@ -33,6 +48,7 @@
             android:text="I felt okay."
             android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:textSize="16sp"
+            android:scaleX="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewQuestion1" />
@@ -144,7 +160,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/textViewSpinnerLabel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:spinnerMode="dialog"
             />
 
