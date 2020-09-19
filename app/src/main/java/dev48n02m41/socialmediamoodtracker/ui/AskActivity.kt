@@ -182,13 +182,13 @@ class AskActivity : AppCompatActivity() {
             repeatMode = ValueAnimator.REVERSE
             start()
         }
-        ObjectAnimator.ofFloat(btnSubmit, "scaleX", 1.01f).apply {
+        ObjectAnimator.ofFloat(btnSubmit, "scaleX", 1.015f).apply {
             duration = 1000
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
             start()
         }
-        ObjectAnimator.ofFloat(btnSubmit, "scaleY", 1.01f).apply {
+        ObjectAnimator.ofFloat(btnSubmit, "scaleY", 1.015f).apply {
             duration = 1000
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE

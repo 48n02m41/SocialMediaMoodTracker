@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun animate() {
-        ObjectAnimator.ofFloat(textViewHeader, "scaleX", 1.01f).apply {
+        ObjectAnimator.ofFloat(textViewHeader, "scaleX", 1.015f).apply {
             duration = 1000
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
