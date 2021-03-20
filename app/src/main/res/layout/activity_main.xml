@@ -77,13 +77,26 @@
         app:layout_constraintTop_toBottomOf="@id/btn_ask"
         />
 
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login Test"
+        android:minWidth="160dp"
+        android:layout_margin="8dp"
+        android:onClick="login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_list"
+        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_list"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
         android:layout_margin="32dp"
         android:text="This app is currently in an unfinished state. \nFollow my progress on GitHub. \nhttps://github.com/48n02m41"
         />

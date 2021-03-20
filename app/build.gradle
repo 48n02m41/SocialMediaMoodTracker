@@ -4,16 +4,17 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "dev48n02m41.socialmediamoodtracker"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 3
         versionName "1.00003"
         vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [auth0Domain: "@string/com_auth0_domain", auth0Scheme: "app"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -112,5 +113,8 @@ dependencies {
     // UI
     def materialVersion = '1.2.1'
     implementation "com.google.android.material:material:$materialVersion"
+
+    // Auth0 Android SDK
+    implementation 'com.auth0.android:auth0:2.0.0'
 
 }

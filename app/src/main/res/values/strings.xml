@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Mood Tracker for Social Media</string>
+    <string name="com_auth0_client_id">ip5JcsEM1KfsJ1PMjJN9B18WDRvOBWii</string>
+    <string name="com_auth0_domain">nullcorp.eu.auth0.com</string>
+    <string name="com_auth0_scheme">app</string>
 
     <string-array name="social_networks_array">
         <item>Facebook</item>
