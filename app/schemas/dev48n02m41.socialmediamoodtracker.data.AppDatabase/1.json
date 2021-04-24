@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "578c5ff7489a82d886f79a16cefa0a1d",
+    "identityHash": "5ddec2a20d2d7c8d0defeacae51b5bc7",
     "entities": [
       {
         "tableName": "diary_entry_table",
@@ -47,12 +47,56 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "api_diary_entry_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER, `date_created` INTEGER, `id` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "socialNetworkChoice",
+            "columnName": "social_network",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "beforeMoodRating",
+            "columnName": "before_mood_rating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "afterMoodRating",
+            "columnName": "after_mood_rating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "date_created",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '578c5ff7489a82d886f79a16cefa0a1d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5ddec2a20d2d7c8d0defeacae51b5bc7')"
     ]
   }
 }

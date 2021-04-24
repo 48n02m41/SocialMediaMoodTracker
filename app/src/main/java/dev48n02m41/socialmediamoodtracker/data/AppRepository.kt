@@ -3,20 +3,27 @@ package dev48n02m41.socialmediamoodtracker.data
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import dev48n02m41.socialmediamoodtracker.data.dao.APIDiaryEntryDao
 import dev48n02m41.socialmediamoodtracker.data.dao.DiaryEntryDao
+import dev48n02m41.socialmediamoodtracker.data.entities.APIDiaryEntryEntity
 import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 
 class AppRepository(application: Application) {
     private var diaryEntryDao: DiaryEntryDao
+    private var apiDiaryEntryDao: APIDiaryEntryDao
 
     // Observed data
     var allDiaryEntries: LiveData<List<DiaryEntryEntity>>
+    var allAPIDiaryEntries: LiveData<List<APIDiaryEntryEntity>>
 
     init {
         val database: AppDatabase = AppDatabase.getDatabase(application.applicationContext)
 
         diaryEntryDao = database.diaryEntryDao()
+        apiDiaryEntryDao = database.apiDiaryEntryDao()
+
         allDiaryEntries = diaryEntryDao.getAllFlow().asLiveData()
+        allAPIDiaryEntries = apiDiaryEntryDao.getAllFlow().asLiveData()
     }
 
     fun getAllDiaryEntriesBySocialNetwork(socialNetwork: String) {
@@ -37,6 +44,10 @@ class AppRepository(application: Application) {
 
     suspend fun deleteAllDiaryEntries() {
         diaryEntryDao.deleteAll()
+    }
+
+    fun getAllAPIDiaryEntriesBySocialNetwork(socialNetwork: String) {
+        apiDiaryEntryDao.getAllBySocialNetworkFlow(socialNetwork)
     }
 
     companion object {

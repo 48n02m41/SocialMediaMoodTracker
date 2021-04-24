@@ -12,6 +12,7 @@ class APITestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_a_p_i_test)
 
+        // Retrieve encrypted access token, if it exists.
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
         val sharedPreferences = EncryptedSharedPreferences.create(
@@ -25,7 +26,6 @@ class APITestActivity : AppCompatActivity() {
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", "Access token not found.")
 
         Log.d(APITestActivity.TAG, "Token: $accessToken")
-
     }
 
     companion object {

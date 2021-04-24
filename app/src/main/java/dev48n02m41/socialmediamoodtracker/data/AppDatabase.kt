@@ -6,11 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import dev48n02m41.socialmediamoodtracker.data.converters.DateConverter
+import dev48n02m41.socialmediamoodtracker.data.dao.APIDiaryEntryDao
 import dev48n02m41.socialmediamoodtracker.data.dao.DiaryEntryDao
+import dev48n02m41.socialmediamoodtracker.data.entities.APIDiaryEntryEntity
 import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 
 @Database(
-    entities = [DiaryEntryEntity::class],
+    entities = [DiaryEntryEntity::class, APIDiaryEntryEntity::class],
     version = 1,
     exportSchema = true
 )
@@ -18,6 +20,7 @@ import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun diaryEntryDao(): DiaryEntryDao
+    abstract fun apiDiaryEntryDao(): APIDiaryEntryDao
 
     companion object {
         // DB Singleton with thread safety.
