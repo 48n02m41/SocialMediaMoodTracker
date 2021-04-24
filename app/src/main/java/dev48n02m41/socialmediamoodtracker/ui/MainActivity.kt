@@ -3,22 +3,24 @@ package dev48n02m41.socialmediamoodtracker.ui
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.auth0.android.Auth0
-import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
-import com.auth0.android.management.ManagementException
-import com.auth0.android.management.UsersAPIClient
+import com.auth0.android.callback.Callback
+import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
-import com.auth0.android.callback.Callback
 import dev48n02m41.socialmediamoodtracker.R
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 private lateinit var textViewHeader: TextView
 private lateinit var btnAsk: Button
@@ -101,6 +103,7 @@ class MainActivity : AppCompatActivity() {
                 // Called when there is an authentication failure
                 override fun onFailure(exception: AuthenticationException) {
                     // Something went wrong!
+                    Log.d(MainActivity.TAG, "Bad login attempt.")
                 }
 
                 // Called when authentication completed successfully
@@ -108,6 +111,23 @@ class MainActivity : AppCompatActivity() {
                     // Get the access token from the credentials object.
                     // This can be used to call APIs
                     val accessToken = credentials.accessToken
+
+                    val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+                    val sharedPreferences = EncryptedSharedPreferences.create(
+                        "encrypted_shared_prefs",
+                        masterKeyAlias,
+                        applicationContext,
+                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                    )
+
+                    with(sharedPreferences.edit()) {
+                        putString("ACCESS_TOKEN", accessToken)
+                        apply()
+                    }
+
+                    Log.d(MainActivity.TAG, "Got access token.")
                 }
             })
     }
@@ -158,4 +178,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(x)
     }
 
+    fun openAPITestActivity(view: View) {
+        val x = Intent(this, APITestActivity::class.java)
+        startActivity(x)
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 }

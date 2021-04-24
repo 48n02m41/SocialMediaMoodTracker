@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "dev48n02m41.socialmediamoodtracker"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 3
         versionName "1.00003"
@@ -116,5 +116,9 @@ dependencies {
 
     // Auth0 Android SDK
     implementation 'com.auth0.android:auth0:2.0.0'
+
+    // Security
+    implementation "androidx.security:security-crypto:1.0.0"
+    implementation "androidx.security:security-identity-credential:1.0.0-alpha02"
 
 }

@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.APITestActivity"></activity>
         <activity android:name=".ui.MoodLogListActivity" />
         <activity android:name=".ui.AskActivity" />
         <activity android:name=".ui.MainActivity">
@@ -20,6 +21,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>
