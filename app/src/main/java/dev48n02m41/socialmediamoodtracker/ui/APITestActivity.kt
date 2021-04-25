@@ -60,14 +60,18 @@ class APITestActivity : AppCompatActivity() {
                 response: Response<List<APIDiaryEntryEntity>>?
             ) {
 
-                if (response?.body() != null) {
+                if(response == null) {
+                    Log.d(TAG, "Response is null.")
+                }
+                else {
+                    Log.d(TAG, "Response not null.")
                     apiTestViewModel.insertAPIDiaryEntries(response.body())
-                    Log.d(TAG, "Successful GET")
                 }
             }
 
             override fun onFailure(call: Call<List<APIDiaryEntryEntity>>?, t: Throwable?) {
-                Log.d(TAG, "API GET failed.")
+                Log.d(TAG, "API GET onFailure...")
+                Log.d(TAG, "" + t?.message)
             }
         })
     }

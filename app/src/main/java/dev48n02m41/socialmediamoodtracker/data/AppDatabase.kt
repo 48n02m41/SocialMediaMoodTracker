@@ -13,7 +13,7 @@ import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 
 @Database(
     entities = [DiaryEntryEntity::class, APIDiaryEntryEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(DateConverter::class)
