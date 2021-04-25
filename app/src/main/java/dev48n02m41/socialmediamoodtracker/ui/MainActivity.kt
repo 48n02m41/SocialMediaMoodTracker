@@ -3,6 +3,7 @@ package dev48n02m41.socialmediamoodtracker.ui
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,6 +29,7 @@ private lateinit var btnList: Button
 private lateinit var account: Auth0
 private lateinit var client: String
 private lateinit var domain: String
+private lateinit var encryptedSharedPreferences: SharedPreferences
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         handleUI()
+        prepareEncryptedSharedPreferences()
         animate()
 
         client = getString(R.string.com_auth0_client_id)
@@ -43,6 +46,20 @@ class MainActivity : AppCompatActivity() {
         // Auth0 account object
         account = Auth0(
             client, domain
+        )
+
+        showUserProfile(encryptedSharedPreferences.getString("ACCESS_TOKEN", "No access token found").toString())
+    }
+
+    private fun prepareEncryptedSharedPreferences() {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+        encryptedSharedPreferences = EncryptedSharedPreferences.create(
+            "encrypted_shared_prefs",
+            masterKeyAlias,
+            applicationContext,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
 
@@ -111,19 +128,11 @@ class MainActivity : AppCompatActivity() {
                     // Get the access token from the credentials object.
                     // This can be used to call APIs
                     val token = credentials.idToken
+                    val accessToken = credentials.accessToken
 
-                    val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-
-                    val sharedPreferences = EncryptedSharedPreferences.create(
-                        "encrypted_shared_prefs",
-                        masterKeyAlias,
-                        applicationContext,
-                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-                    )
-
-                    with(sharedPreferences.edit()) {
-                        putString("ACCESS_TOKEN", token)
+                    with(encryptedSharedPreferences.edit()) {
+                        putString("TOKEN", token)
+                        putString("ACCESS_TOKEN", accessToken)
                         apply()
                     }
                 }
@@ -152,12 +161,18 @@ class MainActivity : AppCompatActivity() {
             .start(object : Callback<UserProfile, AuthenticationException> {
                 override fun onFailure(exception: AuthenticationException) {
                     // Something went wrong!
+                    Log.d(TAG, "Failed to show user profile details.")
+                    Log.d(TAG, exception.getCode())
+                    textViewLoggedInAs.text = "Not logged in."
                 }
 
                 override fun onSuccess(profile: UserProfile) {
                     // We have the user's profile!
                     val email = profile.email
                     val name = profile.name
+
+                    Log.d(TAG, "User name: $name")
+                    textViewLoggedInAs.text = "Logged in as $name"
                 }
             })
     }

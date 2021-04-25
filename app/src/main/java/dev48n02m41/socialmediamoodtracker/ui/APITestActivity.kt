@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 private lateinit var apiTestViewModel: APITestViewModel
-private lateinit var accessToken: String
+private lateinit var token: String
 
 
 class APITestActivity : AppCompatActivity() {
@@ -41,10 +41,10 @@ class APITestActivity : AppCompatActivity() {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
 
-        accessToken =
-            sharedPreferences.getString("ACCESS_TOKEN", "Access token not found.").toString()
+        token =
+            sharedPreferences.getString("TOKEN", "Token not found.").toString()
 
-        Log.d(APITestActivity.TAG, "Token: $accessToken")
+        Log.d(APITestActivity.TAG, "Token: $token")
     }
 
     fun grabAPIData(view: View) {
@@ -52,7 +52,7 @@ class APITestActivity : AppCompatActivity() {
     }
 
     private fun apiGetData() {
-        val apiGETAll = APIInterface.create().getAll("Bearer $accessToken")
+        val apiGETAll = APIInterface.create().getAll("Bearer $token")
 
         apiGETAll.enqueue(object : retrofit2.Callback<List<APIDiaryEntryEntity>> {
             override fun onResponse(
