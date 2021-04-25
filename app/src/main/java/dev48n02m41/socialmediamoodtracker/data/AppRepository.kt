@@ -34,6 +34,10 @@ class AppRepository(application: Application) {
         diaryEntryDao.insertOne(objectIn)
     }
 
+    suspend fun insertAPIDiaryEntries(objectsIn: List<APIDiaryEntryEntity>) {
+        apiDiaryEntryDao.insertAll(objectsIn)
+    }
+
     suspend fun updateOneDiaryEntry(objectIn: DiaryEntryEntity) {
         diaryEntryDao.updateOne(objectIn)
     }

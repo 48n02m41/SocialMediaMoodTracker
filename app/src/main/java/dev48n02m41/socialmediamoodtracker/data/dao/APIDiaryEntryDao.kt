@@ -21,7 +21,7 @@ interface APIDiaryEntryDao {
 
     // Insert / update
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOne(vararg objectIn: APIDiaryEntryEntity)
+    suspend fun insertAll(objectsIn: List<APIDiaryEntryEntity>)
 
     @Update
     suspend fun updateOne(vararg objectIn: APIDiaryEntryEntity)

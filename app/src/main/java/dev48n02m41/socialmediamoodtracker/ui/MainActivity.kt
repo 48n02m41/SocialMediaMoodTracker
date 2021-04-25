@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(credentials: Credentials) {
                     // Get the access token from the credentials object.
                     // This can be used to call APIs
-                    val accessToken = credentials.accessToken
+                    val token = credentials.idToken
 
                     val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
@@ -123,11 +123,9 @@ class MainActivity : AppCompatActivity() {
                     )
 
                     with(sharedPreferences.edit()) {
-                        putString("ACCESS_TOKEN", accessToken)
+                        putString("ACCESS_TOKEN", token)
                         apply()
                     }
-
-                    Log.d(MainActivity.TAG, "Got access token.")
                 }
             })
     }
