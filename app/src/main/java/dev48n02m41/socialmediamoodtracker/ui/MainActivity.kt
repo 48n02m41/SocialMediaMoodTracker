@@ -121,6 +121,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(exception: AuthenticationException) {
                     // Something went wrong!
                     Log.d(MainActivity.TAG, "Bad login attempt.")
+                    showUserProfile(encryptedSharedPreferences.getString("ACCESS_TOKEN", "No access token found").toString()) // refresh
                 }
 
                 // Called when authentication completed successfully
@@ -135,6 +136,8 @@ class MainActivity : AppCompatActivity() {
                         putString("ACCESS_TOKEN", accessToken)
                         apply()
                     }
+
+                    showUserProfile(encryptedSharedPreferences.getString("ACCESS_TOKEN", "No access token found").toString()) // refresh
                 }
             })
     }
