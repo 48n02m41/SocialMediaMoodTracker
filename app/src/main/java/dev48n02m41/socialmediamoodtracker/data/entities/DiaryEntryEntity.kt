@@ -3,20 +3,24 @@ package dev48n02m41.socialmediamoodtracker.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 @Entity(tableName = "diary_entry_table")
 data class DiaryEntryEntity(
-    @ColumnInfo(name = "social_network") var socialNetworkChoice: String?,
-    @ColumnInfo(name = "before_mood_rating") var beforeMoodRating: Int?,
-    @ColumnInfo(name = "after_mood_rating") var afterMoodRating: Int?,
+    @Expose @ColumnInfo(name = "social_network") var socialNetworkChoice: String?,
+    @Expose @ColumnInfo(name = "before_mood_rating") var beforeMoodRating: Int?,
+    @Expose @ColumnInfo(name = "after_mood_rating") var afterMoodRating: Int?,
 ) {
-    @PrimaryKey(autoGenerate = true)
+    @Expose @PrimaryKey(autoGenerate = true)
     var id: Int? = null
-    @ColumnInfo(name = "date_created")
+    @Expose @ColumnInfo(name = "date_created")
     var dateCreated: Instant = Instant.now()
+
+    @ColumnInfo(name = "is_uploaded_to_api")
+    var isUploadedToAPI: Boolean = false
 
     override fun toString(): String {
         return "DiaryEntryEntity(socialNetworkChoice=$socialNetworkChoice, " +

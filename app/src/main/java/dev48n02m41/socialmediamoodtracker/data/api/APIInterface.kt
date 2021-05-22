@@ -1,7 +1,6 @@
 package dev48n02m41.socialmediamoodtracker.data.api
 
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
+import com.google.gson.GsonBuilder
 import dev48n02m41.socialmediamoodtracker.data.entities.APIDiaryEntryEntity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
 import java.util.concurrent.TimeUnit
-import kotlin.coroutines.coroutineContext
 
 interface APIInterface {
 
@@ -31,8 +29,10 @@ interface APIInterface {
 
         fun create(): APIInterface {
 
+            val gsonWithExclude = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+
             val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gsonWithExclude))
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .build()

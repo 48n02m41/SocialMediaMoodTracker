@@ -65,7 +65,7 @@ class APITestActivity : AppCompatActivity() {
                 }
                 else {
                     Log.d(TAG, "Response not null.")
-                    apiTestViewModel.insertAPIDiaryEntries(response.body())
+                    apiTestViewModel.insertAPIDiaryEntries(response.body()!!)
                 }
             }
 
