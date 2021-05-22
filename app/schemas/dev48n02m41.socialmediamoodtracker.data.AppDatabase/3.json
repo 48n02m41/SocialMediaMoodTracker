@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "05916a4d8b8405ec1f95ce48a4e48629",
+    "identityHash": "3122a66bf7c85ef7de14276302d5bfe5",
     "entities": [
       {
         "tableName": "diary_entry_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `date_created` INTEGER NOT NULL, `is_uploaded_to_api` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `date_created` INTEGER NOT NULL, `is_uploaded_to_api` INTEGER NOT NULL DEFAULT false)",
         "fields": [
           {
             "fieldPath": "socialNetworkChoice",
@@ -42,7 +42,8 @@
             "fieldPath": "isUploadedToAPI",
             "columnName": "is_uploaded_to_api",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "false"
           }
         ],
         "primaryKey": {
@@ -102,7 +103,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '05916a4d8b8405ec1f95ce48a4e48629')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3122a66bf7c85ef7de14276302d5bfe5')"
     ]
   }
 }

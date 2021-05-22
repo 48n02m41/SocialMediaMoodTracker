@@ -1,10 +1,7 @@
 package dev48n02m41.socialmediamoodtracker.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import dev48n02m41.socialmediamoodtracker.data.converters.DateConverter
 import dev48n02m41.socialmediamoodtracker.data.dao.APIDiaryEntryDao
 import dev48n02m41.socialmediamoodtracker.data.dao.DiaryEntryDao
@@ -13,6 +10,9 @@ import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 
 @Database(
     entities = [DiaryEntryEntity::class, APIDiaryEntryEntity::class],
+    autoMigrations = [
+        AutoMigration(from = 2, to = 3)
+                     ],
     version = 3,
     exportSchema = true
 )

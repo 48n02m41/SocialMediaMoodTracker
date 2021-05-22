@@ -19,7 +19,7 @@ data class DiaryEntryEntity(
     @Expose @ColumnInfo(name = "date_created")
     var dateCreated: Instant = Instant.now()
 
-    @ColumnInfo(name = "is_uploaded_to_api")
+    @ColumnInfo(name = "is_uploaded_to_api", defaultValue = false.toString())
     var isUploadedToAPI: Boolean = false
 
     override fun toString(): String {
