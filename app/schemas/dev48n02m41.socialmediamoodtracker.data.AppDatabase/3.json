@@ -1,0 +1,108 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "05916a4d8b8405ec1f95ce48a4e48629",
+    "entities": [
+      {
+        "tableName": "diary_entry_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `date_created` INTEGER NOT NULL, `is_uploaded_to_api` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "socialNetworkChoice",
+            "columnName": "social_network",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "beforeMoodRating",
+            "columnName": "before_mood_rating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "afterMoodRating",
+            "columnName": "after_mood_rating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "date_created",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isUploadedToAPI",
+            "columnName": "is_uploaded_to_api",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "api_diary_entry_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`social_network` TEXT, `before_mood_rating` INTEGER, `after_mood_rating` INTEGER, `date_created` TEXT, `id` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "socialNetworkChoice",
+            "columnName": "social_network",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "beforeMoodRating",
+            "columnName": "before_mood_rating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "afterMoodRating",
+            "columnName": "after_mood_rating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "date_created",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '05916a4d8b8405ec1f95ce48a4e48629')"
+    ]
+  }
+}
