@@ -3,22 +3,19 @@ package dev48n02m41.socialmediamoodtracker.ui
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import dev48n02m41.socialmediamoodtracker.R
 import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 import dev48n02m41.socialmediamoodtracker.ui.viewmodels.DiaryEntryViewModel
-import kotlinx.coroutines.delay
 
 private lateinit var seekBarAfter: SeekBar
 private lateinit var seekBarBefore: SeekBar

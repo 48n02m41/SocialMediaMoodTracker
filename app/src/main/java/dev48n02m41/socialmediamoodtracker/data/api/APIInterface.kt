@@ -2,20 +2,30 @@ package dev48n02m41.socialmediamoodtracker.data.api
 
 import com.google.gson.GsonBuilder
 import dev48n02m41.socialmediamoodtracker.data.entities.APIDiaryEntryEntity
+import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 interface APIInterface {
 
     @GET("api/")
-    fun getAll(@Header("authorization") authHeader: String): Call<List<APIDiaryEntryEntity>>
+    suspend fun getAll(@Header("authorization") authHeader: String): Response<List<APIDiaryEntryEntity>>
 
+    @POST("api/")
+    suspend fun postALL(
+        @Header("authorization") authHeader: String,
+        @Body stuffToSend: List<DiaryEntryEntity>
+    ): Response<ResponseBody>
 
     companion object {
         var BASE_URL = "https://social-mood-track-backend.herokuapp.com/v1/"

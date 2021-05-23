@@ -13,13 +13,17 @@ interface DiaryEntryDao {
 
     fun getAllFlow() = getAll().distinctUntilChanged() // Flow only notifies on change.
 
+    @Query("SELECT * FROM diary_entry_table ORDER BY id DESC")
+    suspend fun getAllSuspended(): List<DiaryEntryEntity>
+
     @Query("SELECT * FROM diary_entry_table WHERE social_network = :socialNetworkIn ORDER BY id DESC")
     abstract fun getBySocialNetwork(socialNetworkIn: String): Flow<List<DiaryEntryEntity>>
 
     @Query("SELECT * FROM diary_entry_table WHERE social_network = :socialNetworkIn ORDER BY id DESC")
     fun getBySocialNetworkTest(socialNetworkIn: String): List<DiaryEntryEntity>
 
-    fun getAllBySocialNetworkFlow(socialNetworkIn: String) = getBySocialNetwork(socialNetworkIn).distinctUntilChanged()
+    fun getAllBySocialNetworkFlow(socialNetworkIn: String) =
+        getBySocialNetwork(socialNetworkIn).distinctUntilChanged()
 
     // Insert / update
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -30,6 +34,9 @@ interface DiaryEntryDao {
 
     @Update
     suspend fun updateOne(vararg objectIn: DiaryEntryEntity)
+
+    @Update
+    suspend fun updateAllSuspended(listIn: List<DiaryEntryEntity>)
 
     // Delete
     @Delete

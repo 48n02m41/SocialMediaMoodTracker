@@ -2,7 +2,6 @@ package dev48n02m41.socialmediamoodtracker.data.dao
 
 import androidx.room.*
 import dev48n02m41.socialmediamoodtracker.data.entities.APIDiaryEntryEntity
-import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -14,6 +13,9 @@ interface APIDiaryEntryDao {
 
     fun getAllFlow() = getAll().distinctUntilChanged() // Flow only notifies on change.
 
+    @Query("SELECT * FROM api_diary_entry_table ORDER BY id DESC")
+    fun getAllNotSuspended(): List<APIDiaryEntryEntity>
+
     @Query("SELECT * FROM api_diary_entry_table WHERE social_network = :socialNetworkIn ORDER BY id DESC")
     abstract fun getBySocialNetwork(socialNetworkIn: String): Flow<List<APIDiaryEntryEntity>>
 
@@ -22,6 +24,9 @@ interface APIDiaryEntryDao {
     // Insert / update
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(objectsIn: List<APIDiaryEntryEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllSuspended(objectsIn: List<APIDiaryEntryEntity>)
 
     @Update
     suspend fun updateOne(vararg objectIn: APIDiaryEntryEntity)

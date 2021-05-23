@@ -1,9 +1,9 @@
 package dev48n02m41.socialmediamoodtracker.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
@@ -44,37 +44,37 @@ class APITestActivity : AppCompatActivity() {
         token =
             sharedPreferences.getString("TOKEN", "Token not found.").toString()
 
-        Log.d(APITestActivity.TAG, "Token: $token")
+        //Log.d(APITestActivity.TAG, "Token: $token")
     }
 
     fun grabAPIData(view: View) {
-        apiGetData()
+        //apiGetData()
     }
 
-    private fun apiGetData() {
-        val apiGETAll = APIInterface.create().getAll("Bearer $token")
-
-        apiGETAll.enqueue(object : retrofit2.Callback<List<APIDiaryEntryEntity>> {
-            override fun onResponse(
-                call: Call<List<APIDiaryEntryEntity>>?,
-                response: Response<List<APIDiaryEntryEntity>>?
-            ) {
-
-                if(response == null) {
-                    Log.d(TAG, "Response is null.")
-                }
-                else {
-                    Log.d(TAG, "Response not null.")
-                    apiTestViewModel.insertAPIDiaryEntries(response.body()!!)
-                }
-            }
-
-            override fun onFailure(call: Call<List<APIDiaryEntryEntity>>?, t: Throwable?) {
-                Log.d(TAG, "API GET onFailure...")
-                Log.d(TAG, "" + t?.message)
-            }
-        })
-    }
+//    private fun apiGetData() {
+//        val apiGETAll = APIInterface.create().getAll("Bearer $token")
+//
+//        apiGETAll.enqueue(object : retrofit2.Callback<List<APIDiaryEntryEntity>> {
+//            override fun onResponse(
+//                call: Call<List<APIDiaryEntryEntity>>?,
+//                response: Response<List<APIDiaryEntryEntity>>?
+//            ) {
+//
+//                if(response == null) {
+//                    Log.d(TAG, "Response is null.")
+//                }
+//                else {
+//                    Log.d(TAG, "Response not null.")
+//                    apiTestViewModel.insertAPIDiaryEntries(response.body()!!)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<APIDiaryEntryEntity>>?, t: Throwable?) {
+//                Log.d(TAG, "API GET onFailure...")
+//                Log.d(TAG, "" + t?.message)
+//            }
+//        })
+//    }
 
     companion object {
         private const val TAG = "APITestActivity"

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.auth0.android.Auth0
@@ -20,7 +21,11 @@ import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
 import dev48n02m41.socialmediamoodtracker.R
+import dev48n02m41.socialmediamoodtracker.ui.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 private lateinit var textViewHeader: TextView
@@ -30,12 +35,20 @@ private lateinit var account: Auth0
 private lateinit var client: String
 private lateinit var domain: String
 private lateinit var encryptedSharedPreferences: SharedPreferences
+private lateinit var token: String
+private lateinit var mainActivityViewModel: MainActivityViewModel
+private val scope = CoroutineScope(Dispatchers.Main)
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        // ViewModel
+        mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
         handleUI()
         prepareEncryptedSharedPreferences()
         animate()
@@ -48,7 +61,12 @@ class MainActivity : AppCompatActivity() {
             client, domain
         )
 
-        showUserProfile(encryptedSharedPreferences.getString("ACCESS_TOKEN", "No access token found").toString())
+        showUserProfile(
+            encryptedSharedPreferences.getString(
+                "ACCESS_TOKEN",
+                "No access token found"
+            ).toString()
+        ) // refresh
     }
 
     private fun prepareEncryptedSharedPreferences() {
@@ -121,14 +139,20 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(exception: AuthenticationException) {
                     // Something went wrong!
                     Log.d(MainActivity.TAG, "Bad login attempt.")
-                    showUserProfile(encryptedSharedPreferences.getString("ACCESS_TOKEN", "No access token found").toString()) // refresh
+                    token = ""
+                    showUserProfile(
+                        encryptedSharedPreferences.getString(
+                            "ACCESS_TOKEN",
+                            "No access token found"
+                        ).toString()
+                    ) // refresh
                 }
 
                 // Called when authentication completed successfully
                 override fun onSuccess(credentials: Credentials) {
                     // Get the access token from the credentials object.
                     // This can be used to call APIs
-                    val token = credentials.idToken
+                    token = credentials.idToken
                     val accessToken = credentials.accessToken
 
                     with(encryptedSharedPreferences.edit()) {
@@ -137,7 +161,12 @@ class MainActivity : AppCompatActivity() {
                         apply()
                     }
 
-                    showUserProfile(encryptedSharedPreferences.getString("ACCESS_TOKEN", "No access token found").toString()) // refresh
+                    showUserProfile(
+                        encryptedSharedPreferences.getString(
+                            "ACCESS_TOKEN",
+                            "No access token found"
+                        ).toString()
+                    ) // refresh
                 }
             })
     }
@@ -178,6 +207,31 @@ class MainActivity : AppCompatActivity() {
                     textViewLoggedInAs.text = "Logged in as $name"
                 }
             })
+    }
+
+    private fun getAccessToken() {
+        // Retrieve encrypted access token, if it exists.
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+        val sharedPreferences = EncryptedSharedPreferences.create(
+            "encrypted_shared_prefs",
+            masterKeyAlias,
+            applicationContext,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        token = sharedPreferences.getString("TOKEN", "Token not found.").toString()
+
+        //Log.d(APITestActivity.TAG, "Token: $token")
+    }
+
+    fun sync(view: View) {
+        getAccessToken()
+
+        scope.launch {
+            mainActivityViewModel.fullSync(token)
+        }
     }
 
     fun login(view: View) {

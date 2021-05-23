@@ -3,9 +3,6 @@ package dev48n02m41.socialmediamoodtracker.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 @Entity(tableName = "api_diary_entry_table")
 data class APIDiaryEntryEntity(

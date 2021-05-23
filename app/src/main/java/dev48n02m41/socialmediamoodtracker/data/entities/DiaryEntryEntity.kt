@@ -14,9 +14,9 @@ data class DiaryEntryEntity(
     @Expose @ColumnInfo(name = "before_mood_rating") var beforeMoodRating: Int?,
     @Expose @ColumnInfo(name = "after_mood_rating") var afterMoodRating: Int?,
 ) {
-    @Expose @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     var id: Int? = null
-    @Expose @ColumnInfo(name = "date_created")
+    @ColumnInfo(name = "date_created")
     var dateCreated: Instant = Instant.now()
 
     @ColumnInfo(name = "is_uploaded_to_api", defaultValue = false.toString())

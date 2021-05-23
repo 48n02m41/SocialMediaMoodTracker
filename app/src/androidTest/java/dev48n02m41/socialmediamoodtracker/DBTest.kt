@@ -1,7 +1,6 @@
 package dev48n02m41.socialmediamoodtracker
 
 import android.content.Context
-import androidx.lifecycle.asLiveData
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
@@ -10,7 +9,8 @@ import dev48n02m41.socialmediamoodtracker.data.AppDatabase
 import dev48n02m41.socialmediamoodtracker.data.dao.APIDiaryEntryDao
 import dev48n02m41.socialmediamoodtracker.data.dao.DiaryEntryDao
 import dev48n02m41.socialmediamoodtracker.data.entities.DiaryEntryEntity
-import org.hamcrest.CoreMatchers.*
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
