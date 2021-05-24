@@ -72,10 +72,13 @@ class AppRepository(application: Application) {
         val apiGETAll = APIInterface.create().getAll("Bearer $token")
 
         if (apiGETAll.isSuccessful) {
-            Log.d("API", "Response is null.")
+            Log.d("API", "Response to GET is successful.")
+
+            val incomingData: List<APIDiaryEntryEntity> = apiGETAll.body()!!.toList()
 
             scope.launch {
-                apiDiaryEntryDao.insertAllSuspended(apiGETAll.body()!!)
+                apiDiaryEntryDao.deleteAll() // clear previous.
+                apiDiaryEntryDao.insertAllSuspended(incomingData) // store new data to SQLite
             }
         } else {
             Log.d("API", "API GET onFailure...")
@@ -84,31 +87,35 @@ class AppRepository(application: Application) {
     }
 
     private suspend fun apiPostData(token: String) {
-        Log.d(AppRepository.TAG, "Attempting POST...")
-        var listOfDataToSend = diaryEntryDao.getAllSuspended()
+        var listOfDataToSend = diaryEntryDao.getAllNotUploaded()
 
-        val apiPOSTAll = APIInterface.create().postALL("Bearer $token", listOfDataToSend)
+        if (listOfDataToSend.isNotEmpty()) {
+            Log.d(TAG, "Attempting POST...")
+            val apiPOSTAll = APIInterface.create().postALL("Bearer $token", listOfDataToSend)
 
-        if (apiPOSTAll.isSuccessful) {
-            // Convert raw JSON to pretty JSON using GSON library
-            val gson = GsonBuilder().setPrettyPrinting().create()
-            val prettyJson = gson.toJson(
-                JsonParser.parseString(
-                    apiPOSTAll.body().toString()
+            if (apiPOSTAll.isSuccessful) {
+                Log.d(TAG, "Response to POST is successful.")
+
+                // Convert raw JSON to pretty JSON using GSON library
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val prettifiedJson = gson.toJson(
+                    JsonParser.parseString(
+                        apiPOSTAll.body().toString()
+                    )
                 )
-            )
-            Log.d(AppRepository.TAG, prettyJson)
+                Log.d(TAG, prettifiedJson)
 
-            // Mark diaryEntries as isUploaded:True and update in SQLite.
-            for (data in listOfDataToSend) {
-                data.isUploadedToAPI = true
-            }
-            scope.launch {
-                diaryEntryDao.updateAllSuspended(listOfDataToSend)
-            }
+                // Mark diaryEntries as isUploaded:True and update in SQLite.
+                for (data in listOfDataToSend) {
+                    data.isUploadedToAPI = true
+                }
+                scope.launch {
+                    diaryEntryDao.updateAllSuspended(listOfDataToSend)
+                }
 
-        } else {
-            Log.d(AppRepository.TAG, apiPOSTAll.body().toString())
+            } else {
+                Log.d(TAG, apiPOSTAll.body().toString())
+            }
         }
     }
 

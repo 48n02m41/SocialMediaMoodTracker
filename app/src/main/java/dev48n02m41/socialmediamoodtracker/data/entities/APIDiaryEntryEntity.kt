@@ -3,14 +3,15 @@ package dev48n02m41.socialmediamoodtracker.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 
 @Entity(tableName = "api_diary_entry_table")
 data class APIDiaryEntryEntity(
-    @ColumnInfo(name = "social_network") var socialNetworkChoice: String?,
-    @ColumnInfo(name = "before_mood_rating") var beforeMoodRating: Int?,
-    @ColumnInfo(name = "after_mood_rating") var afterMoodRating: Int?,
-    @ColumnInfo(name = "date_created") var dateCreated: String?,
-    @PrimaryKey(autoGenerate = false) var id: Int?,
+    @Expose @ColumnInfo(name = "social_network") var socialNetworkChoice: String?,
+    @Expose @ColumnInfo(name = "before_mood_rating") var beforeMoodRating: Int?,
+    @Expose @ColumnInfo(name = "after_mood_rating") var afterMoodRating: Int?,
+    @Expose @ColumnInfo(name = "date_created") var dateCreated: String?,
+    @Expose @PrimaryKey(autoGenerate = false) var id: Int?,
 ) {
     override fun toString(): String {
         return "DiaryEntryEntity(socialNetworkChoice=$socialNetworkChoice, " +

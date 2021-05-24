@@ -16,6 +16,9 @@ interface DiaryEntryDao {
     @Query("SELECT * FROM diary_entry_table ORDER BY id DESC")
     suspend fun getAllSuspended(): List<DiaryEntryEntity>
 
+    @Query("SELECT * FROM diary_entry_table WHERE is_uploaded_to_api = 0")
+    suspend fun getAllNotUploaded(): List<DiaryEntryEntity>
+
     @Query("SELECT * FROM diary_entry_table WHERE social_network = :socialNetworkIn ORDER BY id DESC")
     abstract fun getBySocialNetwork(socialNetworkIn: String): Flow<List<DiaryEntryEntity>>
 
