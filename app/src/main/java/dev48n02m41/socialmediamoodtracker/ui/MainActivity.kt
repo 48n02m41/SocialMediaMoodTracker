@@ -248,8 +248,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(x)
     }
 
-    fun openAPITestActivity(view: View) {
-        val x = Intent(this, APITestActivity::class.java)
+    fun openPieChartTest(view: View) {
+        val x = Intent(this, PieChartTest::class.java)
         startActivity(x)
     }
 
