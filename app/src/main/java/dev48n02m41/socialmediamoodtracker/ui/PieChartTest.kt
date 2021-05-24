@@ -5,7 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import dev48n02m41.socialmediamoodtracker.R
+import java.util.*
+import kotlin.collections.ArrayList
 
 private lateinit var chart: PieChart
 class PieChartTest : AppCompatActivity() {
@@ -14,6 +22,21 @@ class PieChartTest : AppCompatActivity() {
         setContentView(R.layout.activity_pie_chart_test)
 
         chartInit()
+        chartDataInit()
+    }
+
+    private fun chartDataInit() {
+
+        val averageMoodRating: MutableList<PieEntry> = arrayListOf()
+        averageMoodRating.add(PieEntry(3f, "Twitter"))
+        averageMoodRating.add(PieEntry(2f, "Facebook"))
+        averageMoodRating.add(PieEntry(1f, "SnapChat"))
+
+        val dataSet: PieDataSet = PieDataSet(averageMoodRating, "Mood Ratings")
+        dataSet.colors = ColorTemplate.createColors(ColorTemplate.MATERIAL_COLORS)
+        val data: PieData = PieData(dataSet)
+
+        chart.data = data
     }
 
     private fun chartInit() {
